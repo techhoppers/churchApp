@@ -1,0 +1,40 @@
+<div class="container">
+
+        <!-- Marketing Icons Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Create Page</h4>
+                    </div>
+                    <div class="panel-body">
+                      <%= form_for @page do |f|%>
+                      <% unless @page.dashboard %>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                              <%= f.label :title %>
+                              <%= f.text_field :title, :class => "form-control", :required => true %>
+                            </div>
+                        </div>
+                      <% end %>
+                      <div class="control-group form-group">
+                            <div class="controls">
+                              <%= f.label :parent_id, "Parent" %>
+                              <%= f.select :parent_id,Page.where("title not in ('#{@page.title}', 'dashboard')").collect {|p| [ p.title, p.id ] },{:include_blank => true},{ :class => "form-control"} %>
+                            </div>
+                        </div>
+                      <div class="control-group form-group">
+                          <div class="controls">
+                            <%= f.label :description, "Content" %>
+                            <%= f.text_area :description, :class => "form-control summernote" %>
+                          </div>
+                      </div>
+                      <!-- For success/fail messages -->
+                      <button class="btn btn-primary" type="submit">Create</button>
+                      <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>

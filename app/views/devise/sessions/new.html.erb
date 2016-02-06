@@ -1,0 +1,40 @@
+<div class="container">
+
+
+        <!-- Contact Form -->
+        <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Log In</h3>
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <%= f.label :username %>
+                            <%= f.email_field :username, autofocus: true, :class => "form-control" %>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <%= f.label :password %>
+                            <%= f.password_field :password, autocomplete: "off", :class => "form-control" %>
+                        </div>
+                    </div>
+                    <% if devise_mapping.rememberable? -%>
+                      <div class="control-group form-group">
+                          <div class="controls">
+                              <%= f.check_box :remember_me %>
+                              <%= f.label :remember_me %>
+                          </div>
+                      </div>
+                    <% end %>
+                    <%= f.submit "Log in", :class => "btn btn-primary" %>
+               <% end %>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <%= render "devise/shared/links" %>
+
+    </div>
+

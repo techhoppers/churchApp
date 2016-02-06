@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+    <title>Church</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.3/summernote.css" rel="stylesheet">
+    <%= stylesheet_link_tag 'application', media: 'all'%>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>   
+
+    <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<%= root_path %>">First Baptist Church</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <% Page.where("title != 'dashboard' and parent_id is null").each do |page| %>
+            <% if page.has_child? %>
+              <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="<%= page_path(page) %>"><%= page.title.humanize if page.title %> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <% page.children.each do |sub_page| %>
+                  <li>
+                    <a href="<%= page_path(sub_page) %>"><%= sub_page.title.humanize if sub_page.title %></a>
+                  </li>
+                  <% end %>
+                </ul>
+              </li>
+            <% else %>
+              <li>
+                <a href="<%= page_path(page) %>"><%= page.title.humanize if page.title %></a>
+              </li>
+            <% end %>
+          <% end %>
+              <li>
+                <a href="<%= pages_path %>">Admin</a>
+              </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
+  <div class="container marginTop30">
+    <%= yield %>
+  </div>
+  <hr/>
+  <!-- Footer -->
+  <footer>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Developed By <%= link_to "TechHoppers IT Solutions LLP", "http://www.techhoppers.com", :target => "_blank" %></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.3/summernote.js"></script>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+</html>
