@@ -26,8 +26,10 @@ class EventsController < ApplicationController
 
     @event = Event.new(params[:event])
     if @event.save
+      flash[:success] = "Event created successfully!"
       redirect_to events_path
     else
+      flash[:error] = "Event created failed!"
       render :action => :new
     end
   end
@@ -39,14 +41,17 @@ class EventsController < ApplicationController
   def update
     params.permit!
     if @event.update_attributes(params[:event])
+      flash[:success] = "Event updated successfully!"
       redirect_to events_path
     else
+      flash[:error] = "Event updation failed!"
       rediect_to events_path
     end
   end
 
   def destroy
     if @event.destroy
+      flash[:success] = "Event removed successfully!"
       redirect_to events_path
     end
   end

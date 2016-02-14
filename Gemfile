@@ -5,5 +5,6 @@ gem 'mysql2'
 gem 'turbolinks'
 gem 'devise'
 gem 'carrierwave'
+gem 'jquery-rails'
 
 

@@ -25,10 +25,10 @@ class AlbumsController < ApplicationController
           @album.photos.create(:image => image)
         }
       end
-      flash[:notice] = "Your album has been created."
-      redirect_to albums_path
+      flash[:success] = "Your album has been created."
+      redirect_to list_albums_path
     else
-      flash[:alert] = "Something went wrong."
+      flash[:error] = "Something went wrong."
       render :new
     end
   end
@@ -40,8 +40,8 @@ class AlbumsController < ApplicationController
           @album.photos.create(:image => image)
         }
       end
-      flash[:notice] = "Album has been updated."
-      redirect_to albums_path
+      flash[:error] = "Album has been updated."
+      redirect_to list_albums_path
     else
       render :edit
     end
@@ -50,5 +50,11 @@ class AlbumsController < ApplicationController
   def show
     @album = Album.find(params[:id])
     @photos = @album.photos unless @album.blank?
+  end
+
+  def destroy
+    @album = Album.find(params[:id])
+    @album.destroy
+    redirect_to list_albums_path
   end
 end

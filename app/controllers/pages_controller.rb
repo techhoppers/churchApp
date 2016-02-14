@@ -23,8 +23,10 @@ class PagesController < ApplicationController
     params.permit!
     @page = Page.new(params[:page])
     if @page.save
+      flash[:success] = "Page created successfully!"
       redirect_to pages_path
     else
+      flash[:error] = "Page creation failed!"
       render :action => :new
     end
   end
@@ -36,16 +38,20 @@ class PagesController < ApplicationController
   def update
     params.permit!
     if @page.update_attributes(params[:page])
+      flash[:success] = "Page updated successfully!"
       redirect_to pages_path
     else
+      flash[:error] = "Page updation failed"
       render :action => :edit
     end
   end
 
   def destroy
     if @page.destroy
+      flash[:success] = "Page removed successfully!"
       redirect_to pages_path
     else
+      flash[:error] = "Page removal failed! Please try again"
       redirect_to pages_path
     end
   end

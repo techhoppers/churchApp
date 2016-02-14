@@ -83,6 +83,9 @@
     <!-- /.container -->
   </nav>
   <div class="container marginTop30">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
     <%= yield %>
   </div>
   <hr/>
