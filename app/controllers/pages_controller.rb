@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
 
-  skip_before_filter :authenticate_user!, :only => :show
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:show]
   
   layout "admin", :except => [:show]
   before_filter :get_page , :only => [:show, :edit, :update, :destroy, :enable, :disable]

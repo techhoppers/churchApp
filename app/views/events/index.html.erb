@@ -9,8 +9,11 @@
             <td><strong><%= Date.parse(date).strftime("%d %b %Y") %></strong></td>
             <td>
               <% event.each do |e| %>
-                <div><%= e.title %> @ <%= e.start_date.strftime("%I:%M %p") %></div>
-                  <% end %>
+                <div><%= e.title %>
+                  <% unless e.start_date.blank? %>
+                    @ <%= e.start_date.strftime("%I:%M %p") %></div>
+                <% end %>
+              <% end %>
 
             </td>
           </tr>
@@ -19,7 +22,7 @@
 
 
 
-      
+
     </div>
   </div>
 </div>

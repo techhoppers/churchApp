@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   layout "admin", :except => [:index, :show]
 
@@ -26,7 +26,7 @@ class AlbumsController < ApplicationController
         }
       end
       flash[:notice] = "Your album has been created."
-      redirect_to @album
+      redirect_to albums_path
     else
       flash[:alert] = "Something went wrong."
       render :new
@@ -41,7 +41,7 @@ class AlbumsController < ApplicationController
         }
       end
       flash[:notice] = "Album has been updated."
-      redirect_to @album
+      redirect_to albums_path
     else
       render :edit
     end

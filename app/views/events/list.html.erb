@@ -20,9 +20,9 @@
             <tbody>
               <% @events.each do |event|  %>
               <tr>
-                <td><%= event.title.camelize%></td>
-                <td><%= event.start_date.strftime("%d %b %Y @ %I:%M %p") %></td>
-                <td><%= event.end_date.strftime("%d %b %Y @ %I:%M %p") %></td>
+                <td><%= event.title.camelize unless event.title.blank?%></td>
+                <td><%= event.start_date.strftime("%d %b %Y @ %I:%M %p") unless event.start_date.blank?%></td>
+                <td><%= event.end_date.strftime("%d %b %Y @ %I:%M %p") unless event.end_date.blank? %></td>
                 <td>
                     <%= link_to show_icon("fa-edit"), edit_event_path(event), :title => "Edit"  %>
                     <%= link_to show_icon("fa-remove"), event_path(event),
