@@ -1,0 +1,39 @@
+    <div class="container">
+
+        <!-- Marketing Icons Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Add Album</h4>
+                    </div>
+                    <div class="panel-body">
+                      <%= form_for @album, :html => {:multipart => true} do |f| %>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                              <%= f.label :title %>
+                              <%= f.text_field :title, :class => "form-control", :required => true %>
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                              <%= f.label :description %>
+                              <%= f.text_field :description, :class => "form-control", :required => true %>
+                            </div>
+                        </div>
+                      <div class="control-group form-group">
+                            <div class="controls">
+                              <%= f.label :image, "Images" %>
+                              <%= file_field_tag "images[]", type: :file, multiple: true, :class => "form-control" %>
+                            </div>
+                        </div>
+                      <!-- For success/fail messages -->
+                      <button class="btn btn-primary" type="submit">Create</button>
+                      <button class="btn btn-default redirectBack" type="button" data-redirecturl="<%= list_albums_path %>">Back</button>
+                      <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>

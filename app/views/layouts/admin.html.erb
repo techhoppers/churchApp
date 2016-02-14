@@ -10,7 +10,8 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.3/summernote.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" media="screen">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet"  media="screen">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
@@ -33,15 +34,32 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="<%= root_path %>">Site</a>
+            <a href="<%= root_path %>"><%= show_icon_with_text("fa-desktop", "Site") %></a>
           </li>
           <li>
-            <a href="<%= pages_path %>">Pages</a>
+            <a href="<%= pages_path %>"><%= show_icon_with_text("fa-tasks", "Pages") %></a>
           </li>
           <li>
-            <a href="<%= pages_path %>">Settings</a>
+            <a href="<%= pages_path %>"><%= show_icon_with_text("fa-cog", "Settings") %></a>
           </li>
-
+          <li>
+            <a href="<%= list_albums_path %>"><%= show_icon_with_text("fa-photo", "Gallery") %></a>
+          </li>
+          <li>
+            <a href="<%= list_events_path %>"><%= show_icon_with_text("fa-calendar", "Events") %></a>
+          </li>
+          <% if user_signed_in? %>
+          <li>
+            <%= link_to show_icon_with_text("fa-sign-out", "Signout"), destroy_user_session_path, method: :delete %>
+          </li>
+          <% else %>
+          <li>
+            <%= link_to show_icon_with_text("fa-user-plus", "Sign up"), new_user_registration_path %>
+          </li>
+          <li>
+            <%= link_to show_icon_with_text("fa-sign-in", "Sign In"), new_user_session_path %>
+          </li>
+          <% end %>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -73,5 +91,9 @@
 </body>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+<%= javascript_include_tag 'application' %>
 </html>

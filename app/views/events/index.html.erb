@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10">
+      <h1 class="page-header">Upcoming Events</h1>
+
+      <table class="table table-striped">
+        <% @grouped_events.each do |date, event| %>
+          <tr>
+            <td><strong><%= Date.parse(date).strftime("%d %b %Y") %></strong></td>
+            <td>
+              <% event.each do |e| %>
+                <div><%= e.title %> @ <%= e.start_date.strftime("%I:%M %p") %></div>
+                  <% end %>
+
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+
+
+      
+    </div>
+  </div>
+</div>

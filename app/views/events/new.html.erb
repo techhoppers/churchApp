@@ -1,0 +1,50 @@
+<div class="container">
+  <!-- Marketing Icons Section -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Create Event</h4>
+        </div>
+        <% @event.errors.each do |e| %>
+          <%= e.inspect %>
+          <% end %>
+        <div class="panel-body">
+          <%= form_for @event do |f|%>
+            <div class="control-group form-group">
+              <div class="controls">
+                <%= f.label :title %>
+                <%= f.text_field :title, :class => "form-control", :required => true %>
+              </div>
+            </div>
+            <div class="control-group form-group">
+              <div class="controls">
+                <%= f.label :description%>
+                <%= f.text_area :description, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="control-group form-group">
+              <div class='input-group date datePicker'>
+                <%= f.text_field :start_date, :class => "form-control" %>
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+            <div class="control-group form-group">
+              <div class='input-group date datePicker'>
+                 <%= f.text_field :end_date, :class => "form-control" %>
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+            <!-- For success/fail messages -->
+            <button class="btn btn-primary" type="submit">Create Event</button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>

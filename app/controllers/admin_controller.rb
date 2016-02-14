@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
-  #before_action :authenticate_user!
+  before_filter :authenticate_user!
+  
   layout "admin"
   def index
     @pages = Page.all

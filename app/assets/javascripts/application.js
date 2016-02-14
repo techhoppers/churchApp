@@ -23,5 +23,21 @@ $(function() {
         maxHeight: null
        
     });
-    $('.dropdown-toggle').click(function() { var location = $(this).attr('href'); window.location.href = location; return false; });
+    $('.activeMenu').click(function() { 
+        var location = $(this).attr('href');
+        window.location.href = location; return false;
+    });
+
+    $(".fancybox").fancybox({
+        autoDimensions: true
+    });
+
+    $('.datePicker').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm'
+    });
+
+    $(document).on("click", ".redirectBack", function() {
+        alert($(this).data("redirecturl"))
+        window.location = $(this).data("redirecturl");
+    })
 })

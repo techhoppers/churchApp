@@ -5,25 +5,24 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4>Pages <%= link_to show_icon_with_text("fa-plus","Add Page"), new_page_path, :class => "btn btn-default rightFloat" %></h4>
+          <h4>Albums <%= link_to show_icon_with_text("fa-plus","Add Album"), new_album_path, :class => "btn btn-default rightFloat" %></h4>
         </div>
         <div class="panel-body">
           <table class="table table-striped table-hover">
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Published</th>
+                <th>Description</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <% @pages.each do |page|  %>
+              <% @albums.each do |album|  %>
               <tr>
-                <td><%= page.title.camelize%></td>
-                <td><%= page.enabled ? show_icon("fa-check") : show_icon("fa-close") %></td>
+                <td><%= link_to album.title.camelize, album_path(album)%></td>
+                <td><%= album.description %></td>
                 <td>
-                    <%= link_to show_icon("fa-edit"), edit_page_path(page), :title => "Edit"  %>
-                    <%= link_to show_icon("fa-remove"), page_path(page),
+                    <%= link_to show_icon("fa-remove"), album_path(album),
                       :data => {:confirm => "Are you sure?", :method => :delete}, :title => "Delete Page"  %>
                 </td>
               </tr>

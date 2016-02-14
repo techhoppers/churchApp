@@ -10,6 +10,7 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.3/summernote.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
     <%= stylesheet_link_tag 'application', media: 'all'%>
     <%= csrf_meta_tags %>
   </head>
@@ -34,24 +35,50 @@
           <% Page.where("title != 'dashboard' and parent_id is null").each do |page| %>
             <% if page.has_child? %>
               <li class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="<%= page_path(page) %>"><%= page.title.humanize if page.title %> <b class="caret"></b></a>
+                <a data-toggle="dropdown" class="dropdown-toggle activeMenu" href="<%= page_path(page) %>"><%= page.title.humanize if page.title %> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <% page.children.each do |sub_page| %>
-                  <li>
-                    <a href="<%= page_path(sub_page) %>"><%= sub_page.title.humanize if sub_page.title %></a>
-                  </li>
+                    <li>
+                      <a href="<%= page_path(sub_page) %>"><%= show_icon_with_text("fa-caret-right",sub_page.title.humanize) if sub_page.title %></a>
+                    </li>
                   <% end %>
                 </ul>
               </li>
             <% else %>
               <li>
-                <a href="<%= page_path(page) %>"><%= page.title.humanize if page.title %></a>
+                <a href="<%= page_path(page) %>"><%= show_icon_with_text("fa-caret-right",page.title.humanize) if page.title %></a>
               </li>
             <% end %>
           <% end %>
+          <li>
+            <a href="<%= albums_path %>"><%= show_icon_with_text("fa-photo", "Gallery") %></a>
+          </li>
+          <li>
+            <a href="<%= events_path %>"><%= show_icon_with_text("fa-calendar", "Events") %></a>
+          </li>
+          <li>
+            <a href="<%= pages_path %>">Admin</a>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle activeMenu" href="#">Share Page <b class="caret"></b></a>
+            <ul class="dropdown-menu socialShare">
               <li>
-                <a href="<%= pages_path %>">Admin</a>
+                <a href="http://twitter.com/home?status=<%=request.original_url%>" title="Share on Twitter" target="_blank" class="btn btn-twitter"><i class="fa fa-fw fa-twitter"></i></a>
               </li>
+              <li>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<%=request.original_url%>" title="Share on Facebook" target="_blank" class="btn btn-facebook"><i class="fa fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="https://plus.google.com/share?url=<%=request.original_url%>" title="Share on Google+" target="_blank" class="btn btn-googleplus"><i class="fa fa-google-plus"></i></a>
+              </li>
+              <li>
+                <a href="http://www.stumbleupon.com/submit?url=<%=request.original_url%>" title="Share on StumbleUpon" target="_blank" data-placement="top" class="btn btn-stumbleupon"><i class="fa fa-stumbleupon"></i></a>
+              </li>
+              <li>
+                <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=&amp;title=&amp;summary=<%=request.original_url%>" title="Share on LinkedIn" target="_blank" class="btn btn-linkedin"><i class="fa fa-linkedin"></i></a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -67,13 +94,15 @@
     <div class="row">
       <div class="col-lg-12">
         <p>Developed By <%= link_to "TechHoppers IT Solutions LLP", "http://www.techhoppers.com", :target => "_blank" %></p>
+
       </div>
+
     </div>
   </footer>
-
 </body>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.3/summernote.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </html>
